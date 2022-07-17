@@ -1,34 +1,54 @@
-import React from "react";
+import React, { Component } from "react";
 import css from "./css/NavBarForm.module.css";
 import NavBarChild from "./NavBarChild";
 
-class NavBarForm extends React.Component {
+class NavBarForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: true,
     };
   }
-
-//   This click handler changes the state of isLoggedIn from false to true and back again.
-  handleClick = () => {
-    this.setState({
-      isLoggedIn: true,
-    });
-    console.log(this);
+  handleButtonClick = () => {
+    this.setState(
+      (prevState) => ({
+        isLoggedIn: prevState.isLoggedIn ? false : true,
+      }),
+      () => console.log(this.state.isLoggedIn)
+    );
   };
 
   render() {
     return (
-      <nav className={css.NavBar}>
+      <div className={css.NavBar}>
         <h1>My Gallery</h1>
+
+        {/* This is part of steps 1-8 */}
+        {/* {
+                    this.state.isLoggedIn ? 
+                        <button onClick={() => this.handleButtonClick()}>Login</button>
+                        : 
+                        <form>
+                            <label htmlFor = "username">Username:</label>
+                            <input placeholder="username" id="username"/>
+                            
+                            <label htmlFor = "password">Password:</label>
+                            <input placeholder="password" id="password"/>
+                            <button onClick={() => this.handleButtonClick()}>Submit</button>
+                        </form>
+                        
+                    } */}
+
+        {/* This is how things should look after completing the extra task */}
 
         <NavBarChild
           isLoggedIn={this.state.isLoggedIn}
-          handleClick={this.handleClick}
+          handleClick={this.handleButtonClick}
         />
-      </nav>
+      </div>
     );
   }
 }
+
 export default NavBarForm;
